@@ -6,9 +6,11 @@ function get(){
     if(orders == null){
         document.getElementById("nodata").innerHTML="No Data Available";
     }else{
-    for(let i=1;i<orders.length+1;i++){
+		console.log(orders);
+		var table = document.getElementById("mybody");
+    for(let i=0;i<orders.length;i++){
         var row = '<tr> <td>'+
-            i+
+            (i+1) +
         '</td> <td>'+
         orders[i].name+
         '</td> <td>'+

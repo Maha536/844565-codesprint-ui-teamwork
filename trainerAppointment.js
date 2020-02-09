@@ -10,7 +10,7 @@ function save(){
         console.log("inside if")
     }else{
         fname.focus();
-        
+        alert("fname");
         return false;
     }
     if((lname.value.length >= 3) && (lname.value.length <= 20)){
@@ -18,16 +18,25 @@ function save(){
        
     }else{
             lname.focus();
-            
+            alert("lname");
             return false;
     }   
 
     //validating age
     let age = document.getElementById("ageid");
-    if(age.value <= 15 && age.value >= 100){
+    if((age.value <= 15 && age.value >= 100) || age.value === null ){
         age.focus;
+		alert("age");
         return false;
     }
+	//validating mail
+    let email = document.getElementById("mailid").value;
+    let mailformat = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
+	if(email.value === null){
+		email.focus();
+		alert("email");
+        return false;
+	}
 
     //phone 
     let phone = document.getElementById("one").value+
@@ -40,18 +49,14 @@ function save(){
                 document.getElementById("eight").value+
                 document.getElementById("nine").value+
                 document.getElementById("ten").value;
-    if(phone.length != 10){
+    if(phone.length != 10 || phone.value === null){
+		alert("phone");
         return false;
     }
 
 
-    //validating mail
-    let email = document.getElementById("mail").value;
-    let mailformat = "/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/";
-    if(!email.value.match(mailformat)){
-        email.focus();
-        return false;
-    }
+    
+    
     
 
    
@@ -62,8 +67,9 @@ function save(){
     let country = document.getElementById("country").value;
     let pincode = document.getElementById("pincode").value;
     let address = street+","+city+","+state+","+country+"-"+pincode;
-    if(pincode.length != 6 || street.length <3 || city.length < 3 || country === "Country"){
+if( pincode === null || street === null || city === null ||state === null || pincode.length != 6 || street.length <3 || city.length < 3 || country === "Country"){
         pincode.focus();
+		alert("pincode");
         return false;
     }else{
         
@@ -72,6 +78,11 @@ function save(){
         
     let  trainerpref;
     let pref =  document.getElementById("pref");
+	if(pref.value === null){
+		alert("preference");
+		return false;
+	}
+		
     if(pref.value === "name"){
         trainerpref = document.getElementById("prefname").value;
     }else if(pref.value === "others"){
@@ -88,12 +99,13 @@ if(pref.value === null ){
     let physio = document.getElementById("physio").value;
     if(physio === null){
         physio.focus();
+		alert("physio");
         return false;
         
     }
 
     //timings
-    timimgs=[];
+    let timimgs=[];
     timimgs.push(document.getElementById("monday").value)
     timimgs.push(document.getElementById("tuesday").value)
     timimgs.push(document.getElementById("wednesday").value)
@@ -101,21 +113,23 @@ if(pref.value === null ){
     timimgs.push(document.getElementById("friday").value)
     timimgs.push(document.getElementById("saturday").value)
     timimgs.push(document.getElementById("sunday").value)
-    if(timings.length != 7){
+    if(timimgs.length != 7){
     document.getElementById("monday").focus();
+		alert("timings");
         return false;
     }
-    timings.forEach(element => { 
+    timimgs.forEach(element => { 
         if(element === null){
         document.getElementById("monday").focus();
         return false;
         }    
     });
     //package
-    let package = document.getElementById("package").value;
+    let package1 = document.getElementById("package").value;
 
-    if(package === null ){
+    if(package1 === null ){
         document.getElementById("package").focus();
+		alert("package");
         return false;
     }
 
@@ -125,7 +139,7 @@ if(pref.value === null ){
         "address" : address,
         "city" : city,
         "trainerpref":trainerpref,
-        "package" : package,
+        "package" : package1,
         "mobile" : phone
     }
     if(localStorage.getItem("orders") === null){
